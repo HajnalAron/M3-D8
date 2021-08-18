@@ -125,8 +125,8 @@
           body:JSON.stringify(product),
         })
         if (response.ok) {
-                    const respEvent = await response.json()
-                    alert("Product created successfully with an id of " + respEvent._id)
+                    const respProduct = await response.json()
+                    alert("Product created successfully with an id of " + respProduct._id)
                 } else {
                     if (response.status >= 400 && response.status < 500) {
                         throw new Error("User generated error, verify the data that you are sending!")
