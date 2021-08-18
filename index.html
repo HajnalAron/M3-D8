@@ -81,16 +81,31 @@
       </div>
     </div>
     <script>
+      const getProducts = () => {
+        const url="https://striveschool-api.herokuapp.com/api/product/"
+        fetch(url,{
+          method: "GET",
+          headers:{
+            "Content-Type": "application/json",
+            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTFjZjY5MTJkNTI2MjAwMTViNmRjOTciLCJpYXQiOjE2MjkyOTcwMDMsImV4cCI6MTYzMDUwNjYwM30.6_Bb352-lH4oOE9R9-xucgPaezVk9x4xKTG4nGJ7QDw"
+            },
+        })
+        .then(response =>response.json())
+        .then(data => makeProductCard(data))
+        .catch(error =>console.error(error))
+       
+    }
       let productContainer = document.getElementById('products')
-      const makeProductCard(productData) =>{
+      const makeProductCard = (productData) => {
         productData.forEach(element => {
-          productContainer.innerHTML += `<div class="card" style="width: 18rem;">
-                                          <img src="..." class="card-img-top" alt="...">
+          productContainer.innerHTML += `<div class="card">
+                                          <img src="${element.imageUrl}" class="card-img-top" alt="...">
                                           <div class="card-body">
-                                            <h5 class="card-title">Card title</h5>
-                                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                                          </div>
+                                            <h5 class="card-title">${element.name}</h5>
+                                            <p>${element.brand}</p>
+                                            <p>${element.price}</p>
+                                            <p class="${element.description}</p>
+                                            </div>
                                         </div>`          
         });
       }
